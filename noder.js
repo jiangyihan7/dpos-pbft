@@ -7,7 +7,7 @@ var Transaction = require('./transaction');
 
 var PORT = 10000;
 
-function Node(i, isBad) {
+function Noder(i, isBad) {
   this.id = i;
   this.isBad = isBad;
   this.peerIds = [];
@@ -22,7 +22,7 @@ function Node(i, isBad) {
   this.blockchain.on('new-message', this.broadcast.bind(this));
 }
 
-Node.prototype.connect = function() {
+Noder.prototype.connect = function() {
   for (var i = 0; i < 5; ++i) {
     var rand = Math.floor(Math.random() * 10);
     if (rand !== this.id && !this.peers[rand]) {
@@ -34,29 +34,29 @@ Node.prototype.connect = function() {
   }
 }
 
-Node.prototype.printBlockChain = function() {
+Noder.prototype.printBlockChain = function() {
   this.blockchain.printBlockChain();
 }
 
-Node.prototype.start = function() {
+Noder.prototype.start = function() {
   this.blockchain.start();
 }
 
-Node.prototype.stop = function() {
+Noder.prototype.stop = function() {
 }
 
-Node.prototype.broadcast = function(msg) {
+Noder.prototype.broadcast = function(msg) {
   for (var i in this.peers) {
     this.peers[i].send(msg);
   }
 }
 
-Node.prototype.onConnection_ = function(socket) {
+Noder.prototype.onConnection_ = function(socket) {
   var peer = new Peer(socket, this.id);
   peer.setMessageCb(this.processMessage_.bind(this));
 }
 
-Node.prototype.processMessage_ = function(peer, msg) {
+Noder.prototype.processMessage_ = function(peer, msg) {
   var peerId = peer.getId();
   if (!this.peers[peerId]) {
     this.peers[peerId] = peer;
@@ -64,4 +64,4 @@ Node.prototype.processMessage_ = function(peer, msg) {
   this.blockchain.processMessage(msg);
 }
 
-module.exports = Node;
+module.exports = Noder;

@@ -1,3 +1,4 @@
+//消息类型
 var MessageType = {
   Init: 1,
   Block: 2,

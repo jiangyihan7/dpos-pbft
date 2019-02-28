@@ -1,9 +1,11 @@
-function bad_id(n,arr){
+function bad_id(n){
+
     num=randomNum(n/3);
-    console.log(num);
     if(num==0) {
-        return 'None';
+        return [];
     }else{
+        var arr = [];
+        arr=arr.range(0,n+1);
         return getRandomArrayElements(arr,num);
     }
 }
@@ -34,8 +36,11 @@ function getRandomArrayElements(arr, count) {
     return shuffled.slice(min);}
 
 
-var array = [];
-array=array.range(1,20)
-console.log(bad_id(20, array))
+
+// console.log(bad_id(20))
+
+module.exports = bad_id;
+
+
 
 

@@ -86,7 +86,8 @@ BlockChain.prototype.commitBlock = function(block) {
   this.chain.add(block.getHash(), block);
   var transactions = block.getTransactions();
   for (var i in transactions) {
-    this.transactionIndex[transactions[i].getHash()] = transactions[i];
+    if(i!='range'){
+    this.transactionIndex[transactions[i].getHash()] = transactions[i];}
   }
 }
 

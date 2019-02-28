@@ -31,8 +31,12 @@ function Block(data) {
     size += coinbaseTrs.getSize();
     this.transactions.push(coinbaseTrs);
   }
-  for (var i in this.transactions) {
-    this.data.transactions.push(this.transactions[i].getData());
+  // console.log(this.transactions)
+
+  for (var i in this.transactions){
+  if (i!=='range'){
+     this.data.transactions.push(this.transactions[i].getData());
+  }
   }
   if (!this.data.size) {
     this.data.size = size;
